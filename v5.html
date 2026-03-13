@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<title>Kai</title>
+<style>
+  *, *::before, *::after {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+    box-sizing: border-box;
+    margin: 0; padding: 0;
+  }
+
+  @page { size: A4 portrait; margin: 0; }
+
+  html, body {
+    width: 210mm;
+    height: 297mm;
+    overflow: hidden;
+  }
+
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: #f7f4f0 !important;
+    color: #2c2825;
+    display: flex;
+    flex-direction: column;
+    padding: 40px 48px 36px;
+  }
+
+  /* ── TOKENS ── */
+  /* Warm off-white bg, dark warm brown text, dusty sage accent */
+  :root {
+    --ink:     #2c2825;
+    --ink-mid: #7a726b;
+    --ink-low: #b5aea6;
+    --rule:    #ddd8d2;
+    --accent:  #8a7560;
+    --bg:      #f7f4f0;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 28px;
+    flex-shrink: 0;
+  }
+  .logo {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+  }
+  .logo-name {
+    font-family: Georgia, serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--ink);
+    letter-spacing: 0.08em;
+    font-style: italic;
+  }
+  .logo-rule {
+    width: 1px;
+    height: 14px;
+    background: var(--rule);
+    display: inline-block;
+    margin-bottom: -2px;
+  }
+  .logo-sub {
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 9px;
+    font-weight: 400;
+    color: var(--ink-low);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .header-date {
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 9px;
+    color: var(--ink-low);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    margin-bottom: 28px;
+    flex-shrink: 0;
+  }
+  .hero h1 {
+    font-family: Georgia, serif;
+    font-size: 30px;
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.25;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    margin-bottom: 12px;
+    max-width: 420px;
+  }
+  .hero p {
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 11.5px;
+    color: var(--ink-mid);
+    line-height: 1.75;
+    max-width: 480px;
+    font-weight: 400;
+  }
+
+  /* ── PILLARS ── */
+  .pillars {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+    border-top: 1px solid var(--rule);
+    border-left: 1px solid var(--rule);
+    margin-bottom: 28px;
+    flex-shrink: 0;
+  }
+  .pillar {
+    padding: 16px 18px 16px;
+    border-right: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    background: #f7f4f0 !important;
+  }
+  .pillar-label {
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 8px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+    display: block;
+  }
+  .pillar h3 {
+    font-family: Georgia, serif;
+    font-size: 13px;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .pillar p {
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 10px;
+    color: var(--ink-mid);
+    line-height: 1.65;
+  }
+
+  /* ── BODY GRID ── */
+  .body-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 36px;
+    flex: 1;
+    min-height: 0;
+    margin-bottom: 24px;
+  }
+
+  /* ── SHARED SECTION LABEL ── */
+  .col-label {
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 8px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-low);
+    display: block;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 0;
+  }
+
+  /* ── FEATURES ── */
+  .features { display: flex; flex-direction: column; }
+  .feature {
+    display: flex;
+    gap: 14px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: flex-start;
+  }
+  .feature:last-child { border-bottom: none; }
+  .feature-num {
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 8.5px;
+    color: var(--ink-low);
+    width: 16px;
+    flex-shrink: 0;
+    padding-top: 1.5px;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.05em;
+  }
+  .feature h4 {
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 10.5px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 2px;
+    letter-spacing: -0.01em;
+  }
+  .feature p {
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 9.5px;
+    color: var(--ink-mid);
+    line-height: 1.6;
+  }
+
+  /* ── RIGHT COL ── */
+  .col-right { display: flex; flex-direction: column; gap: 22px; }
+
+  /* ── INTEGRATIONS ── */
+  .chip-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 10px;
+  }
+  .chip {
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 9.5px;
+    font-weight: 400;
+    color: var(--ink-mid);
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    padding: 3px 8px;
+    background: #f0ece7 !important;
+    letter-spacing: 0.02em;
+  }
+  .chip.more {
+    color: var(--accent);
+    border-color: #c8bfb5;
+    background: #ede9e4 !important;
+    font-style: italic;
+  }
+  .callout {
+    background: #ede9e4 !important;
+    border-left: 2px solid var(--accent);
+    padding: 10px 12px;
+  }
+  .callout p {
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 9.5px;
+    color: var(--ink-mid);
+    line-height: 1.65;
+  }
+  .callout p em {
+    font-style: normal;
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  /* ── AGENT STEPS ── */
+  .agent-section { flex: 1; }
+  .steps { display: flex; flex-direction: column; }
+  .step {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .step:last-child { border-bottom: none; }
+  .step-num {
+    font-family: Georgia, serif;
+    font-size: 9px;
+    font-style: italic;
+    color: var(--accent);
+    width: 16px;
+    flex-shrink: 0;
+    padding-top: 1px;
+  }
+  .step h4 {
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 10.5px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 2px;
+    letter-spacing: -0.01em;
+  }
+  .step p {
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 9.5px;
+    color: var(--ink-mid);
+    line-height: 1.6;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+    padding-top: 18px;
+    border-top: 1px solid var(--rule);
+  }
+  .footer p {
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 9px;
+    color: var(--ink-low);
+    letter-spacing: 0.04em;
+  }
+  .cta {
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 1px;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="logo">
+    <span class="logo-name">Kai</span>
+    <span class="logo-rule"></span>
+    <span class="logo-sub">Agentic Workplace</span>
+  </div>
+  <span class="header-date">Product Overview</span>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>Your systems, your team —<br>one intelligent workplace.</h1>
+  <p>Kai connects every tool in your stack, monitors health in real time, and lets any team member build powerful automations — without writing a line of code.</p>
+</div>
+
+<!-- PILLARS -->
+<div class="pillars">
+  <div class="pillar">
+    <span class="pillar-label">I — Visibility</span>
+    <h3>See everything.</h3>
+    <p>A single command center across code, infrastructure, people, and product. In context, never in silos.</p>
+  </div>
+  <div class="pillar">
+    <span class="pillar-label">II — Operations</span>
+    <h3>Monitor health.</h3>
+    <p>Track CI/CD, error rates, sprint velocity, and capacity. Proactive alerts before issues escalate.</p>
+  </div>
+  <div class="pillar">
+    <span class="pillar-label">III — Automation</span>
+    <h3>Build agents.</h3>
+    <p>Turn recurring tasks into automated agents. Define in plain language, ship in minutes.</p>
+  </div>
+</div>
+
+<!-- BODY -->
+<div class="body-grid">
+
+  <!-- LEFT -->
+  <div>
+    <span class="col-label">Platform Capabilities</span>
+    <div class="features">
+      <div class="feature">
+        <span class="feature-num">01</span>
+        <div>
+          <h4>Command Center Dashboard</h4>
+          <p>Live charts, tables, and reports across Team, Risk, Code Quality, and Platform — auto-updated by agents.</p>
+        </div>
+      </div>
+      <div class="feature">
+        <span class="feature-num">02</span>
+        <div>
+          <h4>Scheduled Agents</h4>
+          <p>Weekly reports, dependency scans, sprint summaries, security audits — run automatically on any schedule.</p>
+        </div>
+      </div>
+      <div class="feature">
+        <span class="feature-num">03</span>
+        <div>
+          <h4>Proactive Alerts</h4>
+          <p>Kai monitors your systems continuously and notifies your team in Slack before issues escalate.</p>
+        </div>
+      </div>
+      <div class="feature">
+        <span class="feature-num">04</span>
+        <div>
+          <h4>Cross-System Intelligence</h4>
+          <p>Ask questions spanning GitHub, Linear, PostHog, and your database. One coherent, reasoned answer.</p>
+        </div>
+      </div>
+      <div class="feature">
+        <span class="feature-num">05</span>
+        <div>
+          <h4>Direct Database Access</h4>
+          <p>Query production data safely, debug anomalies, and surface insights without leaving the conversation.</p>
+        </div>
+      </div>
+      <div class="feature">
+        <span class="feature-num">06</span>
+        <div>
+          <h4>Persistent Memory</h4>
+          <p>Kai retains your team's decisions, priorities, and context across every session — no re-briefing required.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="col-right">
+
+    <div>
+      <span class="col-label">Integrations</span>
+      <div class="chip-grid">
+        <div class="chip">GitHub</div>
+        <div class="chip">Slack</div>
+        <div class="chip">Linear</div>
+        <div class="chip">PostHog</div>
+        <div class="chip">AWS</div>
+        <div class="chip">PostgreSQL</div>
+        <div class="chip">Notion</div>
+        <div class="chip">Intercom</div>
+        <div class="chip">Figma</div>
+        <div class="chip">Google Workspace</div>
+        <div class="chip">Gmail</div>
+        <div class="chip">Google Drive</div>
+        <div class="chip">Salesforce</div>
+        <div class="chip">Zoho CRM</div>
+        <div class="chip">HubSpot</div>
+        <div class="chip">Fathom</div>
+        <div class="chip">OneSignal</div>
+        <div class="chip more">+ any REST API</div>
+      </div>
+      <div class="callout">
+        <p><em>Any tool with an API can connect.</em> Datadog, PagerDuty, Stripe, or anything internal. Integrations are plain-text skill files — ready in minutes, no engineering required.</p>
+      </div>
+    </div>
+
+    <div class="agent-section">
+      <span class="col-label">How to Build an Agent</span>
+      <div class="steps">
+        <div class="step">
+          <span class="step-num">i.</span>
+          <div>
+            <h4>Describe the task</h4>
+            <p>Tell Kai what the agent should do in plain language — no specification needed.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">ii.</span>
+          <div>
+            <h4>Set a schedule</h4>
+            <p>Run daily, weekly, on a cron, or trigger on demand at any time.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">iii.</span>
+          <div>
+            <h4>Choose where it delivers</h4>
+            <p>Post to Slack, pin to the dashboard, or save results for later review.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">iv.</span>
+          <div>
+            <h4>It runs itself</h4>
+            <p>Executes on schedule, logs every result, and alerts your team on anomalies.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <p>Kai — Built for engineering, design &amp; product teams who move fast.</p>
+  <a class="cta" href="#">Get in touch</a>
+</div>
+
+</body>
+</html>
