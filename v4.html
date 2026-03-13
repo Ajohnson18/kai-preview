@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<title>Kai — The Agentic Workplace</title>
+<style>
+  *, *::before, *::after {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+    box-sizing: border-box;
+    margin: 0; padding: 0;
+  }
+
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+
+  html, body {
+    width: 210mm;
+    height: 297mm;
+    overflow: hidden;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    background: #0c0c0e !important;
+    color: #a1a1aa;
+    display: flex;
+    flex-direction: column;
+    padding: 36px 44px 32px;
+    gap: 0;
+  }
+
+  /* ── TYPOGRAPHY SCALE ── */
+  .label {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: #52525b;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+    flex-shrink: 0;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .logo-mark {
+    width: 28px; height: 28px;
+    border-radius: 6px;
+    background: #7c6af7 !important;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 800;
+    color: #fff; letter-spacing: -0.5px;
+    flex-shrink: 0;
+  }
+  .logo-name {
+    font-size: 16px; font-weight: 700;
+    color: #fafafa; letter-spacing: -0.3px;
+  }
+  .header-right {
+    text-align: right;
+  }
+  .header-right .label { display: block; margin-bottom: 2px; }
+  .header-right p {
+    font-size: 10px; color: #52525b;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    margin-bottom: 28px;
+    flex-shrink: 0;
+    border-bottom: 1px solid #1c1c1f;
+    padding-bottom: 24px;
+  }
+  .hero h1 {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -1px;
+    color: #fafafa;
+    margin-bottom: 10px;
+    max-width: 460px;
+  }
+  .hero h1 span {
+    color: #7c6af7;
+  }
+  .hero p {
+    font-size: 12px;
+    color: #71717a;
+    line-height: 1.7;
+    max-width: 500px;
+  }
+
+  /* ── THREE PILLARS ── */
+  .pillars {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1px;
+    background: #1c1c1f !important;
+    border: 1px solid #1c1c1f;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 24px;
+    flex-shrink: 0;
+  }
+  .pillar {
+    background: #0c0c0e !important;
+    padding: 18px 20px;
+  }
+  .pillar-num {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    color: #7c6af7;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: block;
+  }
+  .pillar h3 {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: #fafafa;
+    margin-bottom: 6px;
+    letter-spacing: -0.2px;
+  }
+  .pillar p {
+    font-size: 10.5px;
+    color: #71717a;
+    line-height: 1.6;
+  }
+
+  /* ── BODY: 2-COL ── */
+  .body-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    flex: 1;
+    min-height: 0;
+    margin-bottom: 24px;
+  }
+
+  /* ── LEFT COL ── */
+  .col-left {}
+  .col-label {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: #52525b;
+    margin-bottom: 12px;
+    display: block;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #1c1c1f;
+  }
+  .features {
+    display: flex;
+    flex-direction: column;
+  }
+  .feature {
+    padding: 11px 0;
+    border-bottom: 1px solid #18181b;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .feature:last-child { border-bottom: none; }
+  .feature-num {
+    font-size: 9px;
+    font-weight: 600;
+    color: #3f3f46;
+    width: 14px;
+    flex-shrink: 0;
+    padding-top: 1px;
+    font-variant-numeric: tabular-nums;
+  }
+  .feature-body {}
+  .feature h4 {
+    font-size: 11px;
+    font-weight: 600;
+    color: #e4e4e7;
+    margin-bottom: 2px;
+    letter-spacing: -0.1px;
+  }
+  .feature p {
+    font-size: 10px;
+    color: #52525b;
+    line-height: 1.55;
+  }
+
+  /* ── RIGHT COL ── */
+  .col-right {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  /* ── INTEGRATIONS ── */
+  .integrations-section {}
+  .chip-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 12px;
+  }
+  .chip {
+    font-size: 10px;
+    font-weight: 500;
+    color: #71717a;
+    border: 1px solid #27272a;
+    border-radius: 4px;
+    padding: 3px 8px;
+    background: #111113 !important;
+    letter-spacing: -0.1px;
+  }
+  .chip.active {
+    color: #a1a1aa;
+    border-color: #3f3f46;
+    background: #18181b !important;
+  }
+  .callout {
+    background: #111113 !important;
+    border: 1px solid #27272a;
+    border-left: 2px solid #7c6af7;
+    border-radius: 4px;
+    padding: 10px 12px;
+  }
+  .callout p {
+    font-size: 10px;
+    color: #71717a;
+    line-height: 1.6;
+  }
+  .callout p strong {
+    color: #a1a1aa;
+    font-weight: 600;
+  }
+
+  /* ── AGENT STEPS ── */
+  .agent-section {
+    flex: 1;
+  }
+  .steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border: 1px solid #1c1c1f;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .step {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 14px;
+    background: #0c0c0e !important;
+    border-bottom: 1px solid #1c1c1f;
+  }
+  .step:last-child { border-bottom: none; }
+  .step-num {
+    font-size: 9px;
+    font-weight: 700;
+    color: #7c6af7;
+    width: 14px;
+    flex-shrink: 0;
+    padding-top: 1.5px;
+    font-variant-numeric: tabular-nums;
+  }
+  .step-body {}
+  .step h4 {
+    font-size: 10.5px;
+    font-weight: 600;
+    color: #e4e4e7;
+    margin-bottom: 2px;
+    letter-spacing: -0.1px;
+  }
+  .step p {
+    font-size: 9.5px;
+    color: #52525b;
+    line-height: 1.5;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+    padding-top: 20px;
+    border-top: 1px solid #1c1c1f;
+  }
+  .footer-left p {
+    font-size: 9.5px;
+    color: #3f3f46;
+    line-height: 1.6;
+  }
+  .footer-left p strong { color: #52525b; font-weight: 600; }
+  .cta {
+    background: #7c6af7 !important;
+    color: #fff !important;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 8px 18px;
+    border-radius: 5px;
+    text-decoration: none;
+    letter-spacing: -0.1px;
+    flex-shrink: 0;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="logo">
+    <div class="logo-mark">K</div>
+    <div class="logo-name">Kai</div>
+  </div>
+  <div class="header-right">
+    <span class="label">Product Overview</span>
+    <p>Agentic Workplace Platform</p>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>Your systems, your team,<br><span>one intelligent workplace.</span></h1>
+  <p>Kai connects every tool in your stack, monitors their health in real time, and lets any team member build powerful automations — without writing a line of code.</p>
+</div>
+
+<!-- PILLARS -->
+<div class="pillars">
+  <div class="pillar">
+    <span class="pillar-num">01 — Visibility</span>
+    <h3>See Everything</h3>
+    <p>A single command center across code, infrastructure, people, and product. In context, not in silos.</p>
+  </div>
+  <div class="pillar">
+    <span class="pillar-num">02 — Operations</span>
+    <h3>Monitor Health</h3>
+    <p>Track CI/CD, error rates, sprint velocity, and team capacity. Get proactive alerts before things break.</p>
+  </div>
+  <div class="pillar">
+    <span class="pillar-num">03 — Automation</span>
+    <h3>Build Agents</h3>
+    <p>Turn any recurring task into an automated agent. Define it in plain language and ship it in minutes.</p>
+  </div>
+</div>
+
+<!-- BODY GRID -->
+<div class="body-grid">
+
+  <!-- LEFT: Capabilities -->
+  <div class="col-left">
+    <span class="col-label">Platform Capabilities</span>
+    <div class="features">
+      <div class="feature">
+        <span class="feature-num">01</span>
+        <div class="feature-body">
+          <h4>Command Center Dashboard</h4>
+          <p>Live charts, tables, and reports across Team, Risk, Code Quality, and Platform — pinned and auto-updated by agents.</p>
+        </div>
+      </div>
+      <div class="feature">
+        <span class="feature-num">02</span>
+        <div class="feature-body">
+          <h4>Scheduled Agents</h4>
+          <p>Weekly reports, dependency scans, sprint summaries, and security audits — run automatically on any schedule.</p>
+        </div>
+      </div>
+      <div class="feature">
+        <span class="feature-num">03</span>
+        <div class="feature-body">
+          <h4>Proactive Alerts</h4>
+          <p>Kai monitors your systems continuously and notifies your team in Slack before issues escalate.</p>
+        </div>
+      </div>
+      <div class="feature">
+        <span class="feature-num">04</span>
+        <div class="feature-body">
+          <h4>Cross-System Intelligence</h4>
+          <p>Ask questions that span GitHub, Linear, PostHog, and your database. One coherent, reasoned answer.</p>
+        </div>
+      </div>
+      <div class="feature">
+        <span class="feature-num">05</span>
+        <div class="feature-body">
+          <h4>Direct Database Access</h4>
+          <p>Query production data safely, debug anomalies, and surface insights without leaving the conversation.</p>
+        </div>
+      </div>
+      <div class="feature">
+        <span class="feature-num">06</span>
+        <div class="feature-body">
+          <h4>Persistent Memory</h4>
+          <p>Kai retains your team's decisions, priorities, and context across every session — no re-briefing required.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="col-right">
+
+    <!-- Integrations -->
+    <div class="integrations-section">
+      <span class="col-label">Integrations</span>
+      <div class="chip-grid">
+        <div class="chip active">GitHub</div>
+        <div class="chip active">Slack</div>
+        <div class="chip active">Linear</div>
+        <div class="chip active">PostHog</div>
+        <div class="chip active">AWS</div>
+        <div class="chip active">PostgreSQL</div>
+        <div class="chip active">Notion</div>
+        <div class="chip active">Intercom</div>
+        <div class="chip active">Figma</div>
+        <div class="chip active">Fathom</div>
+        <div class="chip active">OneSignal</div>
+        <div class="chip">+ Any REST API</div>
+      </div>
+      <div class="callout">
+        <p><strong>Any tool with an API can be connected.</strong> Stripe, Datadog, PagerDuty, HubSpot, Salesforce, or anything internal. Integrations are plain-text skill files — configurable in minutes, no engineering required.</p>
+      </div>
+    </div>
+
+    <!-- Agent Steps -->
+    <div class="agent-section">
+      <span class="col-label">How to Build an Agent</span>
+      <div class="steps">
+        <div class="step">
+          <span class="step-num">01</span>
+          <div class="step-body">
+            <h4>Describe the task</h4>
+            <p>Tell Kai what the agent should do in plain language — no technical specification needed.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">02</span>
+          <div class="step-body">
+            <h4>Set a schedule</h4>
+            <p>Run daily, weekly, on a cron expression, or trigger on-demand at any time.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">03</span>
+          <div class="step-body">
+            <h4>Choose where it delivers</h4>
+            <p>Post to Slack, pin a report to the dashboard, or save results for later review.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">04</span>
+          <div class="step-body">
+            <h4>It runs itself</h4>
+            <p>The agent executes on schedule, logs every result, and alerts your team on anomalies.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-left">
+    <p><strong>Kai</strong> — Agentic Workplace Platform</p>
+    <p>Built for engineering, design, and product teams who move fast.</p>
+  </div>
+  <a class="cta" href="#">Get Started</a>
+</div>
+
+</body>
+</html>
